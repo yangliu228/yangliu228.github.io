@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>杨柳 | Python 作品集</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --primary: #1f8fa3;
+            --primary-dark: #176d7d;
+            --text: #1f2d3d;
+            --text-sub: #6b7c8a;
+            --bg: #f0f7fa;
+            --card: #ffffff;
+            --line: #e3edf1;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+                         "Microsoft YaHei", sans-serif;
+            background: linear-gradient(180deg, #f0f7fa 0%, #e8f2f6 100%);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .container { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+
+        /* ===== 导航 ===== */
+        nav {
+            display: flex; align-items: center; justify-content: space-between;
+padding: 28px 0;
+        }
+        .logo { display: flex; align-items: center; gap: 10px; font-weight: 700; }
+        .logo-badge {
+            width: 36px; height: 36px; border-radius: 8px;
+            background: var(--primary); color: #fff;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 14px; letter-spacing: 1px;
+        }
+        .nav-links { display: flex; gap: 28px; }
+        .nav-links a {
+            color: var(--text-sub); text-decoration: none; font-size: 15px;
+            transition: color .2s;
+        }
+        .nav-links a:hover { color: var(--primary); }
+
+        /* ===== Hero ===== */
+        .hero {
+            display: grid; grid-template-columns: 1.4fr 1fr; gap: 48px;
+            align-items: center; padding: 56px 0 40px;
+        }
+        .hero-tag {
+            color: var(--primary); font-size: 13px; letter-spacing: 3px;
+            text-transform: uppercase; margin-bottom: 16px;
+        }
+        .hero h1 { font-size: 46px; font-weight: 700; margin-bottom: 14px; }
+.hero h1 span { color: var(--primary); }
+        .hero-sub { font-size: 18px; color: var(--text); margin-bottom: 18px; }
+        .hero-desc { color: var(--text-sub); max-width: 440px; margin-bottom: 32px; }
+
+        .btn-group { display: flex; gap: 14px; flex-wrap: wrap; }
+        .btn {
+            display: inline-block; padding: 13px 28px; border-radius: 8px;
+            text-decoration: none; font-size: 15px; transition: all .2s;
+        }
+        .btn-primary { background: var(--primary); color: #fff; }
+        .btn-primary:hover { background: var(--primary-dark); }
+        .btn-ghost {
+            background: #fff; color: var(--text);
+            border: 1px solid var(--line);
+        }
+        .btn-ghost:hover { border-color: var(--primary); color: var(--primary); }
+
+        /* 右侧信息卡片 */
+        .profile-card {
+            background: var(--card); border-radius: 16px; padding: 28px;
+            box-shadow: 0 4px 20px rgba(31, 143, 163, 0.08);
+        }
+        .avatar {
+            width: 72px; height: 72px; border-radius: 12px;
+background: var(--primary); color: #fff;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 22px; font-weight: 700; letter-spacing: 2px;
+            margin-bottom: 22px;
+        }
+        .info-row {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 14px 0; border-bottom: 1px solid var(--line); font-size: 15px;
+        }
+        .info-row:last-child { border-bottom: none; }
+        .info-label { color: var(--text-sub); }
+        .info-value { font-weight: 600; }
+        .card-bar {
+            margin-top: 18px; height: 4px; border-radius: 2px;
+            background: linear-gradient(90deg, var(--primary) 0%, #9fd8e0 70%, var(--line) 100%);
+        }
+
+        /* ===== 统计 ===== */
+        .stats {
+            display: grid; grid-template-columns: repeat(3, 1fr);
+            gap: 24px; padding: 40px 0;
+        }
+        .stat { text-align: left; }
+        .stat-num {
+            font-size: 34px; font-weight: 700; color: var(--primary);
+}
+        .stat-label { color: var(--text-sub); font-size: 14px; }
+
+        /* ===== 作品集 ===== */
+        section { padding: 40px 0; }
+        .section-tag {
+            color: var(--primary); font-size: 13px; letter-spacing: 3px;
+            text-transform: uppercase; margin-bottom: 10px;
+        }
+        .section-title { font-size: 30px; font-weight: 700; margin-bottom: 32px; }
+
+        .work-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+        }
+        .work-card {
+            background: var(--card); border-radius: 14px; padding: 26px;
+            box-shadow: 0 4px 16px rgba(31, 143, 163, 0.07);
+            transition: transform .2s, box-shadow .2s;
+        }
+        .work-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(31, 143, 163, 0.12);
+        }
+        .work-card h3 { font-size: 18px; margin-bottom: 10px; }
+        .work-card p { color: var(--text-sub); font-size: 14px; margin-bottom: 18px; }
+.work-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 18px; }
+        .tag {
+            font-size: 12px; color: var(--primary);
+            background: rgba(31, 143, 163, 0.1);
+            padding: 4px 10px; border-radius: 6px;
+        }
+        .work-link {
+            color: var(--primary); text-decoration: none; font-size: 14px;
+            font-weight: 600;
+        }
+        .work-link:hover { text-decoration: underline; }
+
+        /* ===== 关于我 ===== */
+        .about-box {
+            background: var(--card); border-radius: 16px; padding: 32px;
+            box-shadow: 0 4px 16px rgba(31, 143, 163, 0.07);
+        }
+        .about-box p { color: var(--text-sub); max-width: 720px; }
+
+        footer {
+            text-align: center; padding: 40px 0; color: var(--text-sub);
+            font-size: 14px;
+        }
+
+        /* ===== 响应式 ===== */
+        @media (max-width: 768px) {
+            .hero { grid-template-columns: 1fr; gap: 32px; padding: 32px 0; }
+            .hero h1 { font-size: 34px; }
+.work-grid { grid-template-columns: 1fr; }
+            .stats { grid-template-columns: repeat(3, 1fr); gap: 12px; }
+            .stat-num { font-size: 26px; }
+            .nav-links { gap: 16px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== 导航 ===== -->
+    <nav class="container">
+        <div class="logo">
+            <div class="logo-badge">YL</div>
+            <span>杨柳</span>
+        </div>
+        <div class="nav-links">
+            <a href=" ">作品</a >
+            <a href="#about">关于我</a >
+            <a href="https://github.com/yangliu228" target="_blank">联系</a >
+        </div>
+    </nav>
+
+    <!-- ===== Hero ===== -->
+    <header class="container hero">
+        <div>
+            <div class="hero-tag">Python / Data Collection</div>
+            <h1>你好，我是<span>杨柳</span></h1>
+            <p class="hero-sub">Python 开发与数据采集</p >
+            <p class="hero-desc">
+                用代码把开放数据变成可理解的信息。专注网页数据采集、数据清洗与自动化流程，在实践中持续打磨编程能力。
+            </p >
+            <div class="btn-group">
+<a href="#work" class="btn btn-primary">查看作品</a >
+                <a href="https://github.com/yangliu228" target="_blank" class="btn btn-ghost">GitHub</a >
+            </div>
+        </div>
+
+        <aside class="profile-card">
+            <div class="avatar">YL</div>
+            <div class="info-row">
+                <span class="info-label">当前状态</span>
+                <span class="info-value">持续学习</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">所在地</span>
+                <span class="info-value">中国 · 陕西</span>
+            </div>
+            <div class="card-bar"></div>
+        </aside>
+    </header>
+
+    <!-- ===== 统计 ===== -->
+    <section class="container stats">
+        <div class="stat">
+            <div class="stat-num">03</div>
+            <div class="stat-label">练习项目</div>
+        </div>
+        <div class="stat">
+            <div class="stat-num">120+</div>
+            <div class="stat-label">学习时长（小时）</div>
+        </div>
+<div class="stat">
+            <div class="stat-num">05</div>
+            <div class="stat-label">掌握工具</div>
+        </div>
+    </section>
+
+    <!-- ===== 作品集 ===== -->
+    <section id="work" class="container">
+        <div class="section-tag">Selected Work</div>
+        <h2 class="section-title">作品集</h2>
+
+        <div class="work-grid">
+            <div class="work-card">
+                <h3>B站视频下载</h3>
+                <div class="work-tags">
+                    <span class="tag">Python</span>
+                    <span class="tag">爬虫</span>
+                </div>
+                <p>通过解析视频页面信息，批量获取视频资源，练习网络请求与数据解析。</p >
+                <a href="bilibili.html" class="work-link">查看详情 →</a >
+            </div>
+
+            <div class="work-card">
+                <h3>小红书自动化爬取</h3>
+                <div class="work-tags">
+                    <span class="tag">Python</span>
+                    <span class="tag">自动化</span>
+                </div>
+                <p>模拟页面浏览流程，采集笔记公开数据，整理为结构化表格。</p >
+<a href="xiaohongshu.html" class="work-link">查看详情 →</a >
+            </div>
+
+            <div class="work-card">
+                <h3>壁纸批量爬取</h3>
+                <div class="work-tags">
+                    <span class="tag">Python</span>
+                    <span class="tag">批量下载</span>
+                </div>
+                <p>按分类批量下载高清壁纸图片，练习文件保存与批量请求逻辑。</p >
+                <a href="wallpaper.html" class="work-link">查看详情 →</a >
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== 关于我 ===== -->
+    <section id="about" class="container">
+        <div class="section-tag">About Me</div>
+        <h2 class="section-title">关于我</h2>
+        <div class="about-box">
+            <p>
+                美术专业背景，同时在学习 Python 编程。喜欢把视觉上的条理感带到代码里，
+                从简单的爬虫小项目开始，逐步理解数据采集、清洗与自动化的完整流程。
+                后续希望结合设计与编程，做出更实用的小工具与可视化页面。
+            </p >
+        </div>
+    </section>
+
+    <footer class="container">
+        © 2026 杨柳 · Built with HTML & CSS
+    </footer>
+
+</body>
+</html>
